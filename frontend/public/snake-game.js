@@ -193,18 +193,24 @@ class SnakeGame {
     }
     
     generateFood() {
+        const tileCountX = Math.floor(this.canvas.width / this.gridSize);
+        const tileCountY = Math.floor(this.canvas.height / this.gridSize);
+        
         this.food = {
-            x: Math.floor(Math.random() * this.tileCount),
-            y: Math.floor(Math.random() * this.tileCount),
+            x: Math.floor(Math.random() * tileCountX),
+            y: Math.floor(Math.random() * tileCountY),
             type: 'apple'
         };
     }
     
     generateCoin() {
         if (this.coins.length < 2 && Math.random() < 0.3) {
+            const tileCountX = Math.floor(this.canvas.width / this.gridSize);
+            const tileCountY = Math.floor(this.canvas.height / this.gridSize);
+            
             this.coins.push({
-                x: Math.floor(Math.random() * this.tileCount),
-                y: Math.floor(Math.random() * this.tileCount),
+                x: Math.floor(Math.random() * tileCountX),
+                y: Math.floor(Math.random() * tileCountY),
                 value: 1,
                 timer: 0
             });
@@ -213,9 +219,12 @@ class SnakeGame {
     
     generatePowerup() {
         if (this.powerups.length < 1 && Math.random() < 0.1) {
+            const tileCountX = Math.floor(this.canvas.width / this.gridSize);
+            const tileCountY = Math.floor(this.canvas.height / this.gridSize);
+            
             this.powerups.push({
-                x: Math.floor(Math.random() * this.tileCount),
-                y: Math.floor(Math.random() * this.tileCount),
+                x: Math.floor(Math.random() * tileCountX),
+                y: Math.floor(Math.random() * tileCountY),
                 type: this.powerupTypes[Math.floor(Math.random() * this.powerupTypes.length)],
                 timer: 0
             });
