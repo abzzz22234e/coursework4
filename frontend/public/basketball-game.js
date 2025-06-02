@@ -1,4 +1,4 @@
-// Basketball Hoop Master Game - Fully Functional
+// Basketball Hoop Master Game - Enhanced with Custom Balls
 class BasketballGame {
     constructor() {
         this.canvas = document.getElementById('basketballCanvas');
@@ -23,7 +23,47 @@ class BasketballGame {
             vy: 0,
             radius: 15,
             isDragging: false,
-            launched: false
+            launched: false,
+            type: 'classic' // classic, aanane-fireball, ice-ball, rainbow-ball, lightning-ball
+        };
+        
+        // Custom ball types
+        this.ballTypes = {
+            classic: {
+                name: 'Classic Basketball',
+                colors: ['#ff8c42', '#ff6b35'],
+                effect: null,
+                unlocked: true,
+                description: 'The traditional orange basketball'
+            },
+            'aanane-fireball': {
+                name: 'Aanane Fireball',
+                colors: ['#ff4500', '#ff0000', '#ffff00'],
+                effect: 'fire',
+                unlocked: true,
+                description: 'Mr. Aanane\'s legendary flaming basketball! 🔥'
+            },
+            'ice-ball': {
+                name: 'Frozen Shot',
+                colors: ['#00ffff', '#87ceeb', '#ffffff'],
+                effect: 'ice',
+                unlocked: true,
+                description: 'Cool as ice, hot as fire! ❄️'
+            },
+            'rainbow-ball': {
+                name: 'Rainbow Power',
+                colors: ['#ff0000', '#ff7700', '#ffff00', '#00ff00', '#0077ff', '#4400ff', '#9900ff'],
+                effect: 'rainbow',
+                unlocked: true,
+                description: 'Taste the rainbow! 🌈'
+            },
+            'lightning-ball': {
+                name: 'Thunder Strike',
+                colors: ['#ffff00', '#ffffff', '#9999ff'],
+                effect: 'lightning',
+                unlocked: true,
+                description: 'Electrifying shots! ⚡'
+            }
         };
         
         // Hoop
@@ -46,6 +86,9 @@ class BasketballGame {
         // Particle system
         this.particles = [];
         
+        // Effect particles for special balls
+        this.effectParticles = [];
+        
         // Targets for precision mode
         this.targets = [];
         
@@ -57,6 +100,60 @@ class BasketballGame {
         this.loadStats();
         this.updateDisplay();
         this.startAnimationLoop();
+        this.setupBallSelector();
+    }
+    
+    setupBallSelector() {
+        // Create ball selector UI in game screen
+        const gameInterface = document.querySelector('.game-interface');
+        if (!document.getElementById('ballSelector')) {
+            const ballSelectorHTML = `
+                <div id="ballSelector" class="ball-selector">
+                    <h4>🏀 Ball Selection</h4>
+                    <div class="ball-options">
+                        ${Object.entries(this.ballTypes).map(([key, ball]) => `
+                            <div class="ball-option ${key === 'classic' ? 'active' : ''}" 
+                                 data-ball-type="${key}" 
+                                 title="${ball.description}">
+                                <div class="ball-preview" data-type="${key}"></div>
+                                <span>${ball.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Add to game interface
+            const gameControls = document.querySelector('.game-controls');
+            gameControls.insertAdjacentHTML('beforebegin', ballSelectorHTML);
+            
+            // Bind ball selection events
+            this.bindBallSelector();
+        }
+    }
+    
+    bindBallSelector() {
+        document.querySelectorAll('.ball-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const ballType = option.getAttribute('data-ball-type');
+                this.selectBall(ballType);
+                
+                // Update active state
+                document.querySelectorAll('.ball-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+            });
+        });
+    }
+    
+    selectBall(ballType) {
+        this.ball.type = ballType;
+        const ballData = this.ballTypes[ballType];
+        
+        // Show selection feedback
+        this.showFeedback(`Selected: ${ballData.name}! ${ballData.description}`, 'info');
+        
+        // Play selection sound
+        this.playSound('select');
     }
     
     bindEvents() {
