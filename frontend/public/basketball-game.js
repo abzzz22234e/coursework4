@@ -492,39 +492,212 @@ class BasketballGame {
     }
     
     drawBall() {
+        const ballData = this.ballTypes[this.ball.type];
+        
         // Ball shadow
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
         this.ctx.beginPath();
         this.ctx.ellipse(this.ball.x, this.canvas.height - 5, this.ball.radius * 0.8, this.ball.radius * 0.3, 0, 0, Math.PI * 2);
         this.ctx.fill();
         
-        // Ball
+        // Draw special effects before ball
+        this.drawBallEffects();
+        
+        // Ball gradient based on type
         const gradient = this.ctx.createRadialGradient(
             this.ball.x - 5, this.ball.y - 5, 0,
             this.ball.x, this.ball.y, this.ball.radius
         );
-        gradient.addColorStop(0, '#ff8c42');
-        gradient.addColorStop(1, '#ff6b35');
+        
+        if (ballData.colors.length > 2) {
+            // Multi-color gradient for special balls
+            ballData.colors.forEach((color, index) => {
+                gradient.addColorStop(index / (ballData.colors.length - 1), color);
+            });
+        } else {
+            // Standard two-color gradient
+            gradient.addColorStop(0, ballData.colors[0]);
+            gradient.addColorStop(1, ballData.colors[1] || ballData.colors[0]);
+        }
         
         this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
         this.ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
         this.ctx.fill();
         
-        // Ball lines
-        this.ctx.strokeStyle = '#000000';
+        // Special ball effects
+        switch(ballData.effect) {
+            case 'fire':
+                this.drawFireEffect();
+                break;
+            case 'ice':
+                this.drawIceEffect();
+                break;
+            case 'rainbow':
+                this.drawRainbowEffect();
+                break;
+            case 'lightning':
+                this.drawLightningEffect();
+                break;
+        }
+        
+        // Ball lines (classic basketball pattern)
+        this.ctx.strokeStyle = this.ball.type === 'aanane-fireball' ? '#000000' : '#333333';
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
         this.ctx.arc(this.ball.x, this.ball.y, this.ball.radius - 2, 0, Math.PI * 2);
         this.ctx.stroke();
         
         // Ball seams
+        if (this.ball.type === 'classic' || this.ball.type === 'aanane-fireball') {
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.ball.x - this.ball.radius + 2, this.ball.y);
+            this.ctx.lineTo(this.ball.x + this.ball.radius - 2, this.ball.y);
+            this.ctx.moveTo(this.ball.x, this.ball.y - this.ball.radius + 2);
+            this.ctx.lineTo(this.ball.x, this.ball.y + this.ball.radius - 2);
+            this.ctx.stroke();
+        }
+        
+        // Draw trailing effect particles during flight
+        if (this.ball.launched && ballData.effect) {
+            this.createTrailParticles();
+        }
+    }
+    
+    drawBallEffects() {
+        const ballData = this.ballTypes[this.ball.type];
+        
+        switch(ballData.effect) {
+            case 'fire':
+                // Pulsing glow
+                this.ctx.shadowColor = '#ff4500';
+                this.ctx.shadowBlur = 20 + Math.sin(Date.now() * 0.01) * 10;
+                break;
+            case 'ice':
+                this.ctx.shadowColor = '#00ffff';
+                this.ctx.shadowBlur = 15;
+                break;
+            case 'lightning':
+                this.ctx.shadowColor = '#ffff00';
+                this.ctx.shadowBlur = 25 + Math.random() * 15;
+                break;
+            case 'rainbow':
+                this.ctx.shadowColor = `hsl(${Date.now() * 0.1 % 360}, 100%, 50%)`;
+                this.ctx.shadowBlur = 20;
+                break;
+        }
+    }
+    
+    drawFireEffect() {
+        // Create flame particles around the ball
+        for (let i = 0; i < 3; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const distance = this.ball.radius + Math.random() * 10;
+            const x = this.ball.x + Math.cos(angle) * distance;
+            const y = this.ball.y + Math.sin(angle) * distance;
+            
+            this.ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, 0, ${0.3 + Math.random() * 0.4})`;
+            this.ctx.beginPath();
+            this.ctx.arc(x, y, 2 + Math.random() * 3, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
+        
+        // Reset shadow
+        this.ctx.shadowBlur = 0;
+    }
+    
+    drawIceEffect() {
+        // Ice crystals
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.lineWidth = 1;
+        for (let i = 0; i < 6; i++) {
+            const angle = (i / 6) * Math.PI * 2;
+            const x1 = this.ball.x + Math.cos(angle) * (this.ball.radius - 5);
+            const y1 = this.ball.y + Math.sin(angle) * (this.ball.radius - 5);
+            const x2 = this.ball.x + Math.cos(angle) * (this.ball.radius + 3);
+            const y2 = this.ball.y + Math.sin(angle) * (this.ball.radius + 3);
+            
+            this.ctx.beginPath();
+            this.ctx.moveTo(x1, y1);
+            this.ctx.lineTo(x2, y2);
+            this.ctx.stroke();
+        }
+        
+        this.ctx.shadowBlur = 0;
+    }
+    
+    drawRainbowEffect() {
+        // Rainbow trail effect
+        this.ctx.strokeStyle = `hsl(${Date.now() * 0.2 % 360}, 100%, 50%)`;
+        this.ctx.lineWidth = 3;
         this.ctx.beginPath();
-        this.ctx.moveTo(this.ball.x - this.ball.radius + 2, this.ball.y);
-        this.ctx.lineTo(this.ball.x + this.ball.radius - 2, this.ball.y);
-        this.ctx.moveTo(this.ball.x, this.ball.y - this.ball.radius + 2);
-        this.ctx.lineTo(this.ball.x, this.ball.y + this.ball.radius - 2);
+        this.ctx.arc(this.ball.x, this.ball.y, this.ball.radius + 5, 0, Math.PI * 2);
         this.ctx.stroke();
+        
+        this.ctx.shadowBlur = 0;
+    }
+    
+    drawLightningEffect() {
+        // Lightning bolts around ball
+        if (Math.random() < 0.3) {
+            this.ctx.strokeStyle = '#ffff00';
+            this.ctx.lineWidth = 2;
+            
+            for (let i = 0; i < 2; i++) {
+                const startAngle = Math.random() * Math.PI * 2;
+                const x1 = this.ball.x + Math.cos(startAngle) * this.ball.radius;
+                const y1 = this.ball.y + Math.sin(startAngle) * this.ball.radius;
+                const x2 = this.ball.x + Math.cos(startAngle) * (this.ball.radius + 15);
+                const y2 = this.ball.y + Math.sin(startAngle) * (this.ball.radius + 15);
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(x1, y1);
+                this.ctx.lineTo(x2 + (Math.random() - 0.5) * 10, y2 + (Math.random() - 0.5) * 10);
+                this.ctx.stroke();
+            }
+        }
+        
+        this.ctx.shadowBlur = 0;
+    }
+    
+    createTrailParticles() {
+        const ballData = this.ballTypes[this.ball.type];
+        
+        if (Math.random() < 0.5) {
+            let color, size;
+            
+            switch(ballData.effect) {
+                case 'fire':
+                    color = ['#ff4500', '#ff6600', '#ffff00'][Math.floor(Math.random() * 3)];
+                    size = 2 + Math.random() * 3;
+                    break;
+                case 'ice':
+                    color = ['#00ffff', '#87ceeb', '#ffffff'][Math.floor(Math.random() * 3)];
+                    size = 1 + Math.random() * 2;
+                    break;
+                case 'rainbow':
+                    color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    size = 2 + Math.random() * 2;
+                    break;
+                case 'lightning':
+                    color = ['#ffff00', '#ffffff', '#9999ff'][Math.floor(Math.random() * 3)];
+                    size = 1 + Math.random() * 3;
+                    break;
+                default:
+                    return;
+            }
+            
+            this.effectParticles.push({
+                x: this.ball.x + (Math.random() - 0.5) * this.ball.radius,
+                y: this.ball.y + (Math.random() - 0.5) * this.ball.radius,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                color: color,
+                size: size,
+                life: 30,
+                maxLife: 30
+            });
+        }
     }
     
     drawParticles() {
