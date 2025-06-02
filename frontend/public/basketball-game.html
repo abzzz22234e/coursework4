@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏀 Hoop Master - Basketball Challenge</title>
+    <link rel="stylesheet" href="basketball-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="court-bg">
+        <div class="court-lines"></div>
+        <div class="crowd-lights"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="basketball-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🏀 HOOP MASTER</h2>
+            </div>
+            <div class="nav-stats">
+                <div class="stat">
+                    <i class="fas fa-bullseye"></i>
+                    <span id="playerScore">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-fire"></i>
+                    <span id="playerStreak">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span id="timeRemaining">60</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="games.html" class="nav-link">← Back to Games</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="screen active">
+            <div class="home-content">
+                <div class="title-section">
+                    <h1 class="game-title">
+                        <span class="ball-icon">🏀</span>
+                        <span class="title-text">HOOP MASTER</span>
+                    </h1>
+                    <p class="game-subtitle">Shoot hoops and score big!</p>
+                </div>
+                
+                <div class="game-modes">
+                    <h3>Choose Your Game Mode</h3>
+                    <div class="mode-cards">
+                        <div class="mode-card" data-mode="classic">
+                            <div class="card-icon">⏱️</div>
+                            <h4>Time Attack</h4>
+                            <p>Score as many points as possible in 60 seconds</p>
+                            <div class="mode-stats">
+                                <span>⭐ Best: <span id="classicBest">0</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mode-card" data-mode="streak">
+                            <div class="card-icon">🔥</div>
+                            <h4>Streak Master</h4>
+                            <p>Keep your streak alive as long as possible</p>
+                            <div class="mode-stats">
+                                <span>🔥 Best Streak: <span id="streakBest">0</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mode-card" data-mode="precision">
+                            <div class="card-icon">🎯</div>
+                            <h4>Precision Challenge</h4>
+                            <p>Hit moving targets with limited shots</p>
+                            <div class="mode-stats">
+                                <span>🎯 Best: <span id="precisionBest">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls-info">
+                    <h4>How to Play</h4>
+                    <div class="controls-grid">
+                        <div class="control-item">
+                            <i class="fas fa-mouse"></i>
+                            <span>Click and drag to aim</span>
+                        </div>
+                        <div class="control-item">
+                            <i class="fas fa-hand-pointer"></i>
+                            <span>Release to shoot</span>
+                        </div>
+                        <div class="control-item">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>Aim for the center of the hoop</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-buttons">
+                    <button class="btn btn-primary" onclick="startGame()">
+                        <i class="fas fa-play"></i>
+                        START SHOOTING
+                    </button>
+                    <button class="btn btn-secondary" onclick="showStats()">
+                        <i class="fas fa-chart-bar"></i>
+                        STATISTICS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-interface">
+                <div class="game-stats">
+                    <div class="stat-display">
+                        <div class="stat-item">
+                            <span class="stat-label">Score</span>
+                            <span class="stat-value" id="currentScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Streak</span>
+                            <span class="stat-value" id="currentStreak">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Shots</span>
+                            <span class="stat-value" id="shotsRemaining">∞</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value" id="gameTimer">60</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-area">
+                    <canvas id="basketballCanvas" width="800" height="600"></canvas>
+                    
+                    <div class="power-meter" id="powerMeter">
+                        <div class="power-bar">
+                            <div class="power-fill" id="powerFill"></div>
+                        </div>
+                        <span class="power-label">Power</span>
+                    </div>
+                    
+                    <div class="game-feedback" id="gameFeedback">
+                        <div class="feedback-text" id="feedbackText">Get ready to shoot!</div>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="btn btn-secondary" onclick="pauseGame()">
+                        <i class="fas fa-pause"></i>
+                        Pause
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-home"></i>
+                        Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="screen">
+            <div class="game-over-content">
+                <div class="game-over-header">
+                    <div class="result-icon" id="gameOverIcon">🏀</div>
+                    <h2 id="gameOverTitle">Game Over!</h2>
+                    <p id="gameOverMessage">Great shooting!</p>
+                </div>
+                
+                <div class="final-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="finalScore">0</div>
+                        <div class="stat-label">Final Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="finalStreak">0</div>
+                        <div class="stat-label">Best Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="shotsMade">0</div>
+                        <div class="stat-label">Shots Made</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="accuracy">0%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                </div>
+                
+                <div class="achievements" id="gameAchievements">
+                    <!-- Achievements will be populated here -->
+                </div>
+                
+                <div class="game-over-actions">
+                    <button class="btn btn-primary" onclick="startGame()">
+                        <i class="fas fa-redo"></i>
+                        Play Again
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-home"></i>
+                        Main Menu
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareScore()">
+                        <i class="fas fa-share"></i>
+                        Share Score
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div id="achievementPopup" class="achievement-popup">
+        <div class="achievement-content">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-text">
+                <h3 id="achievementTitle">Achievement Unlocked!</h3>
+                <p id="achievementDescription">You did something awesome!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="basketball-game.js"></script>
+</body>
+</html>

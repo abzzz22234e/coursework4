@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💻 Finish the Code - Challenge</title>
+    <link rel="stylesheet" href="code-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="code-bg">
+        <div class="terminal-lines"></div>
+        <div class="floating-code"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="code-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>💻 FINISH THE CODE</h2>
+            </div>
+            <div class="nav-stats">
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <span id="playerLevel">1</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    <span id="playerScore">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span id="timeLeft">60</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="games.html" class="nav-link">← Back to Games</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="screen active">
+            <div class="home-content">
+                <div class="title-section">
+                    <h1 class="game-title">
+                        <span class="code-icon">💻</span>
+                        <span class="title-text">FINISH THE CODE</span>
+                    </h1>
+                    <p class="game-subtitle">Test your HTML & JavaScript skills</p>
+                </div>
+                
+                <div class="difficulty-selection">
+                    <h3>Choose Your Challenge</h3>
+                    <div class="difficulty-cards">
+                        <div class="difficulty-card" data-difficulty="beginner">
+                            <div class="card-icon">🌱</div>
+                            <h4>Beginner</h4>
+                            <p>Basic HTML tags and simple JavaScript</p>
+                            <ul>
+                                <li>HTML structure</li>
+                                <li>Basic tags</li>
+                                <li>Simple variables</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="difficulty-card" data-difficulty="intermediate">
+                            <div class="card-icon">🔥</div>
+                            <h4>Intermediate</h4>
+                            <p>Functions, events, and DOM manipulation</p>
+                            <ul>
+                                <li>Functions</li>
+                                <li>Event handlers</li>
+                                <li>DOM queries</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="difficulty-card" data-difficulty="advanced">
+                            <div class="card-icon">⚡</div>
+                            <h4>Advanced</h4>
+                            <p>Complex algorithms and modern JavaScript</p>
+                            <ul>
+                                <li>ES6+ features</li>
+                                <li>Async/await</li>
+                                <li>Complex logic</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-buttons">
+                    <button class="btn btn-primary" onclick="startGame()">
+                        <i class="fas fa-play"></i>
+                        START CODING
+                    </button>
+                    <button class="btn btn-secondary" onclick="showLeaderboard()">
+                        <i class="fas fa-trophy"></i>
+                        LEADERBOARD
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-interface">
+                <div class="game-header">
+                    <div class="challenge-info">
+                        <h3 id="challengeTitle">Complete the Function</h3>
+                        <div class="challenge-meta">
+                            <span class="level-badge" id="currentLevel">Level 1</span>
+                            <span class="difficulty-badge" id="currentDifficulty">Beginner</span>
+                            <span class="points-badge" id="challengePoints">+10 points</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-section">
+                        <div class="timer-circle">
+                            <span id="timer">60</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <h4>Challenge:</h4>
+                        <p id="challengeText">Complete the missing code to make this function work correctly.</p>
+                    </div>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-tabs">
+                                <div class="tab active" data-lang="html">
+                                    <i class="fab fa-html5"></i>
+                                    HTML
+                                </div>
+                                <div class="tab" data-lang="js">
+                                    <i class="fab fa-js-square"></i>
+                                    JavaScript
+                                </div>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-small" onclick="runCode()">
+                                    <i class="fas fa-play"></i>
+                                    Run
+                                </button>
+                                <button class="btn-small" onclick="submitCode()">
+                                    <i class="fas fa-check"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-content">
+                            <div class="line-numbers" id="lineNumbers"></div>
+                            <textarea id="codeInput" placeholder="// Complete the code here..." spellcheck="false"></textarea>
+                        </div>
+                        
+                        <div class="code-output">
+                            <div class="output-header">
+                                <h5>Output:</h5>
+                                <button class="btn-small" onclick="clearOutput()">
+                                    <i class="fas fa-trash"></i>
+                                    Clear
+                                </button>
+                            </div>
+                            <div class="output-content" id="codeOutput">
+                                <div class="output-line">Ready to test your code...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="challenge-hints">
+                        <h4>💡 Hints:</h4>
+                        <div class="hints-list" id="hintsList">
+                            <div class="hint">Click "Show Hint" if you get stuck!</div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="showHint()">
+                            <i class="fas fa-lightbulb"></i>
+                            Show Hint (-5 points)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-content">
+                <div class="results-header">
+                    <div class="result-icon" id="resultIcon">🎉</div>
+                    <h2 id="resultTitle">Challenge Complete!</h2>
+                    <p id="resultMessage">You successfully completed the challenge!</p>
+                </div>
+                
+                <div class="results-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="finalScore">150</div>
+                        <div class="stat-label">Total Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="challengesCompleted">5</div>
+                        <div class="stat-label">Challenges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="finalLevel">3</div>
+                        <div class="stat-label">Level Reached</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="timeBonus">+20</div>
+                        <div class="stat-label">Time Bonus</div>
+                    </div>
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="nextChallenge()">
+                        <i class="fas fa-arrow-right"></i>
+                        Next Challenge
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-home"></i>
+                        Back to Menu
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareScore()">
+                        <i class="fas fa-share"></i>
+                        Share Score
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen" class="screen">
+            <div class="leaderboard-content">
+                <h2>🏆 Leaderboard</h2>
+                
+                <div class="leaderboard-table">
+                    <div class="table-header">
+                        <div class="rank">Rank</div>
+                        <div class="player">Player</div>
+                        <div class="score">Score</div>
+                        <div class="level">Level</div>
+                    </div>
+                    
+                    <div class="table-body" id="leaderboardList">
+                        <div class="table-row">
+                            <div class="rank">1</div>
+                            <div class="player">CodeMaster 💻</div>
+                            <div class="score">2,450</div>
+                            <div class="level">15</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="rank">2</div>
+                            <div class="player">JavaScriptNinja 🥷</div>
+                            <div class="score">2,180</div>
+                            <div class="level">13</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="rank">3</div>
+                            <div class="player">HTMLWizard 🧙‍♂️</div>
+                            <div class="score">1,920</div>
+                            <div class="level">12</div>
+                        </div>
+                        <div class="table-row you">
+                            <div class="rank">4</div>
+                            <div class="player">You 🎯</div>
+                            <div class="score" id="yourScore">150</div>
+                            <div class="level" id="yourLevel">3</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leaderboard-actions">
+                    <button class="btn btn-primary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div id="achievementPopup" class="achievement-popup">
+        <div class="achievement-content">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-text">
+                <h3 id="achievementTitle">Achievement Unlocked!</h3>
+                <p id="achievementDescription">You did something awesome!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="code-game.js"></script>
+</body>
+</html>

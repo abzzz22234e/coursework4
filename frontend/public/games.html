@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Portal - Hot Beans Web</title>
+    <link rel="stylesheet" href="games-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="neon-grid"></div>
+        <div class="floating-particles"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="games-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🎮 GAMES PORTAL</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">← Back to Hot Beans</a></li>
+                <li><a href="unit6.html" class="nav-link">Unit 6</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="games-hero">
+        <div class="hero-content">
+            <h1 class="neon-title">
+                <span class="glitch" data-text="ENTER THE">ENTER THE</span>
+                <span class="glitch" data-text="GAME ZONE">GAME ZONE</span>
+            </h1>
+            <p class="hero-subtitle">Experience next-level gaming with cutting-edge web technology</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Fun</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Games</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Awesome</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Grid -->
+    <section class="games-section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Adventure</h2>
+            <div class="games-grid">
+                <!-- Snake Game -->
+                <div class="game-card featured" data-game="snake">
+                    <div class="game-image">
+                        <img src="https://images.pexels.com/photos/7862493/pexels-photo-7862493.jpeg" alt="Aanane Snake">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>🐍 Aanane Snake</h3>
+                        <p>The ultimate snake experience with coins, custom skins, and the legendary Abdi Biter!</p>
+                        <div class="game-features">
+                            <span class="feature">🪙 Coin System</span>
+                            <span class="feature">🎨 Custom Skins</span>
+                            <span class="feature">🏴 Flag Designs</span>
+                            <span class="feature">⭐ Abdi Biter Snake</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('snake-game.html')">
+                            <span>PLAY NOW</span>
+                            <i class="fas fa-rocket"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Code Challenge Game -->
+                <div class="game-card" data-game="code">
+                    <div class="game-image">
+                        <img src="https://images.pexels.com/photos/1102797/pexels-photo-1102797.png" alt="Finish the Code">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>💻 Finish the Code</h3>
+                        <p>Test your coding skills with progressive HTML and JavaScript challenges!</p>
+                        <div class="game-features">
+                            <span class="feature">📚 Learn HTML</span>
+                            <span class="feature">⚡ JavaScript</span>
+                            <span class="feature">🎯 Levels</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('code-game.html')">
+                            <span>START CODING</span>
+                            <i class="fas fa-code"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Basketball Game -->
+                <div class="game-card" data-game="basketball">
+                    <div class="game-image">
+                        <img src="https://images.unsplash.com/photo-1577416412292-747c6607f055?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxiYXNrZXRiYWxsJTIwY291cnR8ZW58MHx8fHwxNzQ4ODE3MzczfDA&ixlib=rb-4.1.0&q=85" alt="Basketball Hoop">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>🏀 Hoop Master</h3>
+                        <p>Shoot hoops and score big in this addictive basketball challenge!</p>
+                        <div class="game-features">
+                            <span class="feature">🎯 Precision</span>
+                            <span class="feature">⏱️ Time Attack</span>
+                            <span class="feature">🏆 High Score</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('basketball-game.html')">
+                            <span>SHOOT HOOPS</span>
+                            <i class="fas fa-basketball-ball"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Memory Game -->
+                <div class="game-card" data-game="memory">
+                    <div class="game-image">
+                        <img src="https://images.pexels.com/photos/7689143/pexels-photo-7689143.jpeg" alt="Memory Master">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>🧠 Memory Master</h3>
+                        <p>Challenge your memory with this colorful pattern-matching game!</p>
+                        <div class="game-features">
+                            <span class="feature">🎨 Colors</span>
+                            <span class="feature">🧩 Patterns</span>
+                            <span class="feature">📈 Progressive</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('memory-game.html')">
+                            <span>TEST MEMORY</span>
+                            <i class="fas fa-brain"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Neon Runner -->
+                <div class="game-card" data-game="runner">
+                    <div class="game-image">
+                        <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwzfHxjb2xvcmZ1bCUyMHByb2dyYW1taW5nJTIwY29kZXxlbnwwfHx8fDE3NDg4MTczODV8MA&ixlib=rb-4.1.0&q=85" alt="Neon Runner">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>⚡ Neon Runner</h3>
+                        <p>Race through neon tunnels in this high-speed endless runner!</p>
+                        <div class="game-features">
+                            <span class="feature">💫 Neon Effects</span>
+                            <span class="feature">🏃 Endless Run</span>
+                            <span class="feature">⚡ Power-ups</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('runner-game.html')">
+                            <span>START RUNNING</span>
+                            <i class="fas fa-bolt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Arcade Center -->
+                <div class="game-card special" data-game="arcade">
+                    <div class="game-image">
+                        <img src="https://images.pexels.com/photos/1860623/pexels-photo-1860623.jpeg" alt="Arcade Center">
+                        <div class="game-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>🕹️ Retro Arcade</h3>
+                        <p>Classic arcade games with a modern neon twist!</p>
+                        <div class="game-features">
+                            <span class="feature">👾 Retro Style</span>
+                            <span class="feature">🎮 Classic Games</span>
+                            <span class="feature">🌟 Neon Theme</span>
+                        </div>
+                        <button class="game-btn" onclick="openGame('arcade-game.html')">
+                            <span>ENTER ARCADE</span>
+                            <i class="fas fa-gamepad"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="games-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🎮 Games Portal</h3>
+                <p>Powered by cutting-edge web technology and endless creativity.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Hot Beans Web</a></li>
+                    <li><a href="unit6.html">Unit 6 Coursework</a></li>
+                    <li><a href="#games">All Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Game Stats</h4>
+                <ul>
+                    <li>🐍 Snake Game: Level ∞</li>
+                    <li>💻 Code Challenges: Pro</li>
+                    <li>🏀 Basketball: Champion</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hot Beans Web Games Portal</p>
+            <p class="attribution">Powered by Abubakar - Radcliffe School</p>
+        </div>
+    </footer>
+
+    <script src="games-script.js"></script>
+</body>
+</html>

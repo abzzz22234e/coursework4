@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Aanane Snake - Ultimate Edition</title>
+    <link rel="stylesheet" href="snake-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="snake-bg">
+        <div class="matrix-rain"></div>
+        <div class="floating-coins"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="snake-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🐍 AANANE SNAKE</h2>
+            </div>
+            <div class="nav-stats">
+                <div class="stat">
+                    <i class="fas fa-coins"></i>
+                    <span id="coinCount">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <span id="highScore">0</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="games.html" class="nav-link">← Back to Games</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Game Home Screen -->
+        <div id="homeScreen" class="screen active">
+            <div class="home-content">
+                <div class="title-section">
+                    <h1 class="game-title">
+                        <span class="snake-emoji">🐍</span>
+                        <span class="title-text">AANANE SNAKE</span>
+                    </h1>
+                    <p class="game-subtitle">The Ultimate Snake Experience</p>
+                </div>
+                
+                <div class="feature-showcase">
+                    <div class="feature">
+                        <i class="fas fa-coins"></i>
+                        <span>Collect Coins</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-palette"></i>
+                        <span>Custom Skins</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-flag"></i>
+                        <span>Flag Designs</span>
+                    </div>
+                    <div class="feature special">
+                        <i class="fas fa-star"></i>
+                        <span>Abdi Biter Snake</span>
+                    </div>
+                </div>
+                
+                <div class="home-buttons">
+                    <button class="btn btn-primary" onclick="showScreen('gameScreen')">
+                        <i class="fas fa-play"></i>
+                        START GAME
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('customizeScreen')">
+                        <i class="fas fa-paint-brush"></i>
+                        CUSTOMIZE
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('mapScreen')">
+                        <i class="fas fa-map"></i>
+                        MAPS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customize Screen -->
+        <div id="customizeScreen" class="screen">
+            <div class="customize-content">
+                <h2>🎨 Customize Your Snake</h2>
+                
+                <div class="customization-grid">
+                    <!-- Snake Colors -->
+                    <div class="customization-section">
+                        <h3>Snake Colors</h3>
+                        <div class="color-grid">
+                            <div class="color-option active" data-color="classic" style="background: linear-gradient(45deg, #00ff00, #008000)"></div>
+                            <div class="color-option" data-color="fire" style="background: linear-gradient(45deg, #ff0000, #ff6600)"></div>
+                            <div class="color-option" data-color="ice" style="background: linear-gradient(45deg, #00ffff, #0066ff)"></div>
+                            <div class="color-option" data-color="golden" style="background: linear-gradient(45deg, #ffd700, #ffaa00)"></div>
+                            <div class="color-option" data-color="purple" style="background: linear-gradient(45deg, #9900ff, #6600cc)"></div>
+                            <div class="color-option" data-color="rainbow" style="background: linear-gradient(45deg, #ff0000, #ff7700, #ffff00, #00ff00, #0077ff, #4400ff, #9900ff)"></div>
+                        </div>
+                    </div>
+
+                    <!-- Flag Skins -->
+                    <div class="customization-section">
+                        <h3>Flag Skins</h3>
+                        <div class="flag-grid">
+                            <div class="flag-option" data-flag="pakistan">
+                                <div class="flag-preview pakistan-flag"></div>
+                                <span>Pakistan 🇵🇰</span>
+                            </div>
+                            <div class="flag-option" data-flag="uk">
+                                <div class="flag-preview uk-flag"></div>
+                                <span>United Kingdom 🇬🇧</span>
+                            </div>
+                            <div class="flag-option" data-flag="usa">
+                                <div class="flag-preview usa-flag"></div>
+                                <span>USA 🇺🇸</span>
+                            </div>
+                            <div class="flag-option" data-flag="germany">
+                                <div class="flag-preview germany-flag"></div>
+                                <span>Germany 🇩🇪</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Snakes -->
+                    <div class="customization-section">
+                        <h3>Special Snakes</h3>
+                        <div class="special-snakes">
+                            <div class="special-snake unlocked" data-snake="abdi-biter">
+                                <div class="snake-preview abdi-biter-preview">
+                                    <div class="abdi-segment"></div>
+                                    <div class="abdi-segment"></div>
+                                    <div class="abdi-segment"></div>
+                                </div>
+                                <div class="snake-info">
+                                    <h4>⭐ Abdi Biter</h4>
+                                    <p>The legendary snake with special powers!</p>
+                                    <span class="unlock-status">FREE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customize-buttons">
+                    <button class="btn btn-primary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-check"></i>
+                        APPLY & BACK
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Selection Screen -->
+        <div id="mapScreen" class="screen">
+            <div class="map-content">
+                <h2>🗺️ Choose Your Arena</h2>
+                
+                <div class="map-grid">
+                    <div class="map-option active" data-map="classic">
+                        <div class="map-preview classic-map"></div>
+                        <h3>Classic Arena</h3>
+                        <p>The traditional snake battlefield</p>
+                    </div>
+                    
+                    <div class="map-option" data-map="neon">
+                        <div class="map-preview neon-map"></div>
+                        <h3>Neon City</h3>
+                        <p>Cyberpunk-themed arena with glow effects</p>
+                    </div>
+                    
+                    <div class="map-option" data-map="forest">
+                        <div class="map-preview forest-map"></div>
+                        <h3>Jungle Temple</h3>
+                        <p>Navigate through ancient ruins</p>
+                    </div>
+                    
+                    <div class="map-option" data-map="space">
+                        <div class="map-preview space-map"></div>
+                        <h3>Space Station</h3>
+                        <p>Zero gravity snake action</p>
+                    </div>
+                </div>
+                
+                <div class="map-buttons">
+                    <button class="btn btn-primary" onclick="showScreen('homeScreen')">
+                        <i class="fas fa-check"></i>
+                        SELECT & BACK
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-interface">
+                <div class="game-header">
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Score</span>
+                            <span class="stat-value" id="currentScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Length</span>
+                            <span class="stat-value" id="snakeLength">1</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Coins</span>
+                            <span class="stat-value" id="gameCoins">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Level</span>
+                            <span class="stat-value" id="gameLevel">1</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-area">
+                    <canvas id="gameCanvas" width="600" height="400"></canvas>
+                    <div class="game-overlay" id="gameOverlay">
+                        <div class="overlay-content">
+                            <h3 id="overlayTitle">Game Paused</h3>
+                            <p id="overlayMessage">Press SPACE to continue</p>
+                            <div class="overlay-buttons">
+                                <button class="btn btn-primary" onclick="resumeGame()">
+                                    <i class="fas fa-play"></i>
+                                    RESUME
+                                </button>
+                                <button class="btn btn-secondary" onclick="showScreen('homeScreen')">
+                                    <i class="fas fa-home"></i>
+                                    HOME
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <div class="control-section">
+                        <h4>Controls</h4>
+                        <div class="control-keys">
+                            <div class="key-group">
+                                <div class="key">↑</div>
+                                <div class="key">←</div>
+                                <div class="key">↓</div>
+                                <div class="key">→</div>
+                            </div>
+                            <div class="key-info">
+                                <p>Arrow Keys: Move</p>
+                                <p>SPACE: Pause</p>
+                                <p>R: Restart</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-section">
+                        <h4>Power-ups</h4>
+                        <div class="powerups">
+                            <div class="powerup">🍎 <span>Food: +10 points</span></div>
+                            <div class="powerup">🪙 <span>Coin: +50 points + 1 coin</span></div>
+                            <div class="powerup">⚡ <span>Speed Boost: Temporary speed</span></div>
+                            <div class="powerup">💎 <span>Diamond: +100 points</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div id="achievementPopup" class="achievement-popup">
+        <div class="achievement-content">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-text">
+                <h3 id="achievementTitle">Achievement Unlocked!</h3>
+                <p id="achievementDescription">You did something awesome!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="snake-game.js"></script>
+</body>
+</html>

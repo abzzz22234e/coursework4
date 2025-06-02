@@ -1,151 +1,398 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-        <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-        <title>Emergent | Fullstack App</title>
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-        <a
-            id="emergent-badge"
-            target="_blank"
-            href="https://app.emergent.sh/?utm_source=emergent-badge"
-            style="
-                display: flex !important;
-                align-items: center !important;
-                position: fixed !important;
-                bottom: 20px;
-                right: 20px;
-                text-decoration: none;
-                padding: 6px 10px;
-                font-family: -apple-system, BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell,
-                    &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;,
-                    sans-serif !important;
-                font-size: 12px !important;
-                z-index: 9999 !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-                border-radius: 8px !important;
-                background-color: #ffffff !important;
-                border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            "
-        >
-            <div
-                style="display: flex; flex-direction: row; align-items: center"
-            >
-                <img
-                    style="width: 20px; height: 20px; margin-right: 8px"
-                    src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4"
-                />
-                <p
-                    style="
-                        color: #000000;
-                        font-family: -apple-system, BlinkMacSystemFont,
-                            &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu,
-                            Cantarell, &quot;Open Sans&quot;,
-                            &quot;Helvetica Neue&quot;, sans-serif !important;
-                        font-size: 12px !important;
-                        align-items: center;
-                        margin-bottom: 0;
-                    "
-                >
-                    Made with Emergent
-                </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Beans Web - Join Our Developer Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Hot Beans Web</h2>
             </div>
-        </a>
-        <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
-                                            ),
-                                        ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-            });
-        </script>
-    </body>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#careers" class="nav-link">Careers</a></li>
+                <li><a href="#apply" class="nav-link">Apply</a></li>
+                <li><a href="games.html" class="nav-link games-link">🎮 Games Portal</a></li>
+                <li><a href="unit6.html" class="nav-link">Unit 6</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107" alt="Tech Background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Build Your Future</span>
+                    <span class="title-line">With Hot Beans Web</span>
+                </h1>
+                <p class="hero-subtitle">Join our innovative team of web developers and create stunning digital experiences that shape the future of the web.</p>
+                <div class="hero-buttons">
+                    <a href="#apply" class="btn btn-primary">Apply Now</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Projects Delivered</p>
+            </div>
+            <div class="stat">
+                <h3>15+</h3>
+                <p>Team Members</p>
+            </div>
+            <div class="stat">
+                <h3>5+</h3>
+                <p>Years Experience</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Hot Beans Web</h2>
+                <p>Leading the future of web development with innovation and excellence</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>At Hot Beans Web, we're passionate about creating exceptional digital experiences. We believe in fostering talent, encouraging innovation, and building a collaborative environment where developers can thrive and grow.</p>
+                    
+                    <h3>Our Values</h3>
+                    <ul class="values-list">
+                        <li><i class="fas fa-rocket"></i> Innovation-driven development</li>
+                        <li><i class="fas fa-users"></i> Collaborative team environment</li>
+                        <li><i class="fas fa-graduation-cap"></i> Continuous learning and growth</li>
+                        <li><i class="fas fa-star"></i> Excellence in every project</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86" alt="Our Office">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Trainee Developers</h2>
+                <p>Talented individuals shaping the future of web development</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg" alt="Sarah Johnson">
+                    </div>
+                    <div class="team-info">
+                        <h3>Sarah Johnson</h3>
+                        <p class="role">Frontend Developer Trainee</p>
+                        <p class="bio">Passionate about React and modern UI/UX design. Currently mastering advanced JavaScript frameworks and responsive design principles.</p>
+                        <div class="skills">
+                            <span class="skill">React</span>
+                            <span class="skill">CSS3</span>
+                            <span class="skill">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Marcus Chen">
+                    </div>
+                    <div class="team-info">
+                        <h3>Marcus Chen</h3>
+                        <p class="role">Full-Stack Developer Trainee</p>
+                        <p class="bio">Enthusiastic about both frontend and backend technologies. Specializing in Node.js and database architecture with a focus on scalable solutions.</p>
+                        <div class="skills">
+                            <span class="skill">Node.js</span>
+                            <span class="skill">MongoDB</span>
+                            <span class="skill">Express</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://images.pexels.com/photos/7988747/pexels-photo-7988747.jpeg" alt="Emma Rodriguez">
+                    </div>
+                    <div class="team-info">
+                        <h3>Emma Rodriguez</h3>
+                        <p class="role">Backend Developer Trainee</p>
+                        <p class="bio">Dedicated to server-side development and API design. Currently learning cloud technologies and microservices architecture.</p>
+                        <div class="skills">
+                            <span class="skill">Python</span>
+                            <span class="skill">Django</span>
+                            <span class="skill">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="careers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Career Opportunities</h2>
+                <p>Join our team and build your dream career in web development</p>
+            </div>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Junior Frontend Developer</h3>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-details">
+                        <h4>Required Qualifications:</h4>
+                        <ul>
+                            <li>HTML5, CSS3, JavaScript proficiency</li>
+                            <li>Experience with React or Vue.js</li>
+                            <li>Understanding of responsive design</li>
+                            <li>Git version control knowledge</li>
+                            <li>Portfolio of web projects</li>
+                        </ul>
+                        <h4>What You'll Do:</h4>
+                        <ul>
+                            <li>Build responsive web interfaces</li>
+                            <li>Collaborate with design teams</li>
+                            <li>Optimize web applications for performance</li>
+                            <li>Participate in code reviews</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Junior Full-Stack Developer</h3>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-details">
+                        <h4>Required Qualifications:</h4>
+                        <ul>
+                            <li>Frontend: HTML, CSS, JavaScript, React</li>
+                            <li>Backend: Node.js, Express, or Python</li>
+                            <li>Database knowledge (SQL/NoSQL)</li>
+                            <li>API development experience</li>
+                            <li>Understanding of web security principles</li>
+                        </ul>
+                        <h4>What You'll Do:</h4>
+                        <ul>
+                            <li>Develop end-to-end web applications</li>
+                            <li>Design and implement APIs</li>
+                            <li>Work with databases and server infrastructure</li>
+                            <li>Collaborate on architecture decisions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Web Development Intern</h3>
+                        <span class="job-type">Internship</span>
+                    </div>
+                    <div class="job-details">
+                        <h4>Required Qualifications:</h4>
+                        <ul>
+                            <li>Basic HTML, CSS, JavaScript knowledge</li>
+                            <li>Enthusiasm for learning</li>
+                            <li>Currently studying computer science or related field</li>
+                            <li>Problem-solving mindset</li>
+                            <li>Strong communication skills</li>
+                        </ul>
+                        <h4>What You'll Learn:</h4>
+                        <ul>
+                            <li>Modern web development frameworks</li>
+                            <li>Professional coding practices</li>
+                            <li>Project management methodologies</li>
+                            <li>Client communication and requirements gathering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="learning-resources">
+                <h3>Recommended Learning Resources</h3>
+                <div class="resources-grid">
+                    <a href="https://www.freecodecamp.org/" target="_blank" class="resource-card">
+                        <i class="fas fa-code"></i>
+                        <h4>freeCodeCamp</h4>
+                        <p>Free comprehensive web development curriculum</p>
+                    </a>
+                    <a href="https://www.codecademy.com/" target="_blank" class="resource-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4>Codecademy</h4>
+                        <p>Interactive coding lessons and projects</p>
+                    </a>
+                    <a href="https://developer.mozilla.org/" target="_blank" class="resource-card">
+                        <i class="fas fa-book"></i>
+                        <h4>MDN Web Docs</h4>
+                        <p>Complete web development documentation</p>
+                    </a>
+                    <a href="https://www.udemy.com/courses/development/web-development/" target="_blank" class="resource-card">
+                        <i class="fas fa-video"></i>
+                        <h4>Udemy</h4>
+                        <p>Video courses for all skill levels</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Section -->
+    <section id="apply" class="application">
+        <div class="container">
+            <div class="section-header">
+                <h2>Join Our Team</h2>
+                <p>Ready to start your career with Hot Beans Web? Apply now!</p>
+            </div>
+            <div class="application-content">
+                <form class="application-form" id="applicationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Position Applying For</label>
+                        <select id="position" name="position" required>
+                            <option value="">Select a position</option>
+                            <option value="frontend">Junior Frontend Developer</option>
+                            <option value="fullstack">Junior Full-Stack Developer</option>
+                            <option value="intern">Web Development Intern</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Years of Experience</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select experience level</option>
+                            <option value="0-1">0-1 years</option>
+                            <option value="1-2">1-2 years</option>
+                            <option value="2-3">2-3 years</option>
+                            <option value="3+">3+ years</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio URL</label>
+                        <input type="url" id="portfolio" name="portfolio" placeholder="https://yourportfolio.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="github">GitHub Profile</label>
+                        <input type="url" id="github" name="github" placeholder="https://github.com/yourusername">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skills">Technical Skills</label>
+                        <textarea id="skills" name="skills" rows="4" placeholder="List your technical skills (e.g., HTML, CSS, JavaScript, React, Node.js...)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to join Hot Beans Web?</label>
+                        <textarea id="motivation" name="motivation" rows="6" placeholder="Tell us about your motivation and what excites you about working with us..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resume">Resume/CV</label>
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hot Beans Web</h3>
+                    <p>Building the future of web development, one project at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#apply">Apply Now</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> careers@hotbeansweb.com</li>
+                        <li><i class="fas fa-phone"></i> +44 20 1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt"></i> London, UK</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a></li>
+                        <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a></li>
+                        <li><a href="https://www.codecademy.com/" target="_blank">Codecademy</a></li>
+                        <li><a href="games.html">Games Portal</a></li>
+                        <li><a href="#" onclick="secretAccess()" style="color: rgba(255,255,255,0.1); font-size: 0.8rem;">.</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hot Beans Web. All rights reserved.</p>
+                <p class="attribution">Powered by Abubakar - Radcliffe School</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
