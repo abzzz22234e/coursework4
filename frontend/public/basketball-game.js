@@ -399,10 +399,20 @@ class BasketballGame {
     }
     
     updateParticles() {
+        // Update regular particles
         this.particles = this.particles.filter(particle => {
             particle.x += particle.vx;
             particle.y += particle.vy;
             particle.vy += 0.2;
+            particle.life--;
+            return particle.life > 0;
+        });
+        
+        // Update effect particles
+        this.effectParticles = this.effectParticles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.1;
             particle.life--;
             return particle.life > 0;
         });
