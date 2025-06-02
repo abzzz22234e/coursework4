@@ -234,8 +234,12 @@ class SnakeGame {
     move() {
         const head = {x: this.snake[0].x + this.dx, y: this.snake[0].y + this.dy};
         
+        // Calculate current boundaries
+        const tileCountX = Math.floor(this.canvas.width / this.gridSize);
+        const tileCountY = Math.floor(this.canvas.height / this.gridSize);
+        
         // Wall collision
-        if (head.x < 0 || head.x >= this.tileCount || head.y < 0 || head.y >= this.tileCount) {
+        if (head.x < 0 || head.x >= tileCountX || head.y < 0 || head.y >= tileCountY) {
             this.gameOver();
             return;
         }
