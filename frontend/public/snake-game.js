@@ -1,10 +1,14 @@
-// Aanane Snake Game - Fully Functional
+// Aanane Snake Game - Fully Functional with Responsive Canvas
 class SnakeGame {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
+        
+        // Make canvas responsive
+        this.initResponsiveCanvas();
+        
         this.gridSize = 20;
-        this.tileCount = this.canvas.width / this.gridSize;
+        this.tileCount = Math.floor(this.canvas.width / this.gridSize);
         
         // Game state
         this.snake = [{x: 10, y: 10}];
@@ -30,6 +34,72 @@ class SnakeGame {
         this.powerupTypes = ['speed', 'slow', 'double', 'shrink'];
         
         this.init();
+    }
+    
+    initResponsiveCanvas() {
+        // Get the game area container
+        const gameArea = document.querySelector('.game-area');
+        if (!gameArea) return;
+        
+        // Calculate available space
+        const containerRect = gameArea.getBoundingClientRect();
+        const maxWidth = Math.min(800, containerRect.width - 40); // Leave some margin
+        const maxHeight = Math.min(600, window.innerHeight - 300); // Account for header and controls
+        
+        // Ensure canvas maintains reasonable proportions
+        let canvasWidth = Math.max(400, maxWidth);
+        let canvasHeight = Math.max(300, Math.min(maxHeight, canvasWidth * 0.75));
+        
+        // Round down to nearest grid size multiple for crisp rendering
+        canvasWidth = Math.floor(canvasWidth / 20) * 20;
+        canvasHeight = Math.floor(canvasHeight / 20) * 20;
+        
+        // Apply responsive dimensions
+        this.canvas.width = canvasWidth;
+        this.canvas.height = canvasHeight;
+        
+        // Make canvas responsive with CSS
+        this.canvas.style.maxWidth = '100%';
+        this.canvas.style.height = 'auto';
+        this.canvas.style.border = '2px solid #00ff00';
+        this.canvas.style.borderRadius = '10px';
+        this.canvas.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.5)';
+        
+        // Listen for window resize
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
+    }
+    
+    handleResize() {
+        // Re-initialize canvas on resize
+        const oldWidth = this.canvas.width;
+        const oldHeight = this.canvas.height;
+        
+        this.initResponsiveCanvas();
+        
+        // If canvas size changed significantly, recalculate tile count
+        if (Math.abs(this.canvas.width - oldWidth) > 40 || Math.abs(this.canvas.height - oldHeight) > 40) {
+            this.tileCount = Math.floor(this.canvas.width / this.gridSize);
+            
+            // Ensure snake and food are still within bounds
+            this.snake = this.snake.filter(segment => 
+                segment.x < this.tileCount && segment.y < Math.floor(this.canvas.height / this.gridSize)
+            );
+            
+            // Regenerate food if out of bounds
+            if (this.food.x >= this.tileCount || this.food.y >= Math.floor(this.canvas.height / this.gridSize)) {
+                this.generateFood();
+            }
+            
+            // Remove out-of-bounds coins and powerups
+            this.coins = this.coins.filter(coin => 
+                coin.x < this.tileCount && coin.y < Math.floor(this.canvas.height / this.gridSize)
+            );
+            this.powerups = this.powerups.filter(powerup => 
+                powerup.x < this.tileCount && powerup.y < Math.floor(this.canvas.height / this.gridSize)
+            );
+        }
     }
     
     init() {
