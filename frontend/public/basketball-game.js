@@ -1052,6 +1052,10 @@ class BasketballGame {
                 oscillator.frequency.setValueAtTime(659, this.audioContext.currentTime + 0.1);
                 oscillator.frequency.setValueAtTime(784, this.audioContext.currentTime + 0.2);
                 break;
+            case 'select':
+                oscillator.frequency.setValueAtTime(440, this.audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(550, this.audioContext.currentTime + 0.2);
+                break;
         }
         
         gainNode.gain.setValueAtTime(0.1, this.audioContext.currentTime);
