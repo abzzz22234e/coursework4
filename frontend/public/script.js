@@ -32,7 +32,18 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
     
-    // Simple validation
+    // Check for secret roast room access
+    if (data.firstName.toLowerCase() === 'secret' && data.lastName.toLowerCase() === 'room') {
+        // Check if other required fields are blank for secret access
+        const secretFieldsBlank = !data.email && !data.phone && !data.position && !data.experience;
+        
+        if (secretFieldsBlank) {
+            showSecretRoastAccess();
+            return;
+        }
+    }
+    
+    // Simple validation for normal submissions
     const requiredFields = ['firstName', 'lastName', 'email', 'position', 'experience'];
     let isValid = true;
     
