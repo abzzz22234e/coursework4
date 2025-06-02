@@ -701,12 +701,42 @@ class BasketballGame {
     }
     
     drawParticles() {
+        // Draw regular particles
         this.particles.forEach(particle => {
             const alpha = particle.life / particle.maxLife;
             this.ctx.fillStyle = particle.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
             this.ctx.fill();
+        });
+        
+        // Draw special effect particles
+        this.effectParticles.forEach(particle => {
+            const alpha = particle.life / particle.maxLife;
+            this.ctx.fillStyle = particle.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
+    }
+    
+    updateParticles() {
+        // Update regular particles
+        this.particles = this.particles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.2;
+            particle.life--;
+            return particle.life > 0;
+        });
+        
+        // Update effect particles
+        this.effectParticles = this.effectParticles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.1;
+            particle.life--;
+            return particle.life > 0;
         });
     }
     
