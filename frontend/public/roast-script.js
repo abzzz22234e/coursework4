@@ -1,5 +1,197 @@
 // Secret Roast Zone JavaScript
 
+let currentRoastLevel = 'mild';
+
+// Roast level management
+function changeRoastLevel(level) {
+    currentRoastLevel = level;
+    
+    // Update active button
+    document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-level="${level}"]`).classList.add('active');
+    
+    // Update warning text
+    const warnings = {
+        mild: 'Friendly banter mode',
+        medium: 'Standard roasting heat',
+        spicy: 'Extra crispy roasts incoming!',
+        nuclear: '☢️ MAXIMUM DESTRUCTION MODE ☢️'
+    };
+    
+    document.getElementById('currentLevel').textContent = level.toUpperCase();
+    document.getElementById('roastWarning').querySelector('p').innerHTML = 
+        `⚠️ Current Level: <span id="currentLevel">${level.toUpperCase()}</span> - ${warnings[level]}`;
+    
+    // Change background effects based on level
+    updateBackgroundLevel(level);
+    
+    // Update roast content intensity
+    updateRoastContent(level);
+    
+    // Show level change feedback
+    showLevelChangeEffect(level);
+    
+    // Play level change sound
+    playLevelChangeSound(level);
+}
+
+function updateBackgroundLevel(level) {
+    const body = document.body;
+    const fireBackground = document.querySelector('.fire-bg');
+    
+    // Remove existing level classes
+    body.classList.remove('roast-mild', 'roast-medium', 'roast-spicy', 'roast-nuclear');
+    
+    // Add new level class
+    body.classList.add(`roast-${level}`);
+    
+    // Update flame intensity
+    if (fireBackground) {
+        const flames = fireBackground.querySelector('.flames');
+        const sparks = fireBackground.querySelector('.sparks');
+        
+        switch(level) {
+            case 'mild':
+                flames.style.opacity = '0.3';
+                sparks.style.opacity = '0.2';
+                flames.style.animationDuration = '4s';
+                break;
+            case 'medium':
+                flames.style.opacity = '0.5';
+                sparks.style.opacity = '0.4';
+                flames.style.animationDuration = '3s';
+                break;
+            case 'spicy':
+                flames.style.opacity = '0.7';
+                sparks.style.opacity = '0.6';
+                flames.style.animationDuration = '2s';
+                break;
+            case 'nuclear':
+                flames.style.opacity = '1';
+                sparks.style.opacity = '1';
+                flames.style.animationDuration = '1s';
+                // Add nuclear glow effect
+                body.style.filter = 'drop-shadow(0 0 20px #ff0000)';
+                break;
+        }
+    }
+}
+
+function updateRoastContent(level) {
+    const roastCards = document.querySelectorAll('.roast-card');
+    
+    roastCards.forEach(card => {
+        const roastMeter = card.querySelector('.roast-level');
+        const roastQuote = card.querySelector('.roast-quote');
+        const roastRating = card.querySelector('.roast-rating');
+        
+        // Update roast meter based on level
+        let meterMultiplier;
+        switch(level) {
+            case 'mild': meterMultiplier = 0.6; break;
+            case 'medium': meterMultiplier = 0.8; break;
+            case 'spicy': meterMultiplier = 1.0; break;
+            case 'nuclear': meterMultiplier = 1.2; break;
+        }
+        
+        const baseWidth = parseInt(roastMeter.style.width) || 80;
+        const newWidth = Math.min(100, baseWidth * meterMultiplier);
+        roastMeter.style.width = newWidth + '%';
+        
+        // Update meter color
+        const colors = {
+            mild: 'linear-gradient(45deg, #4CAF50, #45a049)',
+            medium: 'linear-gradient(45deg, #ff9800, #ff6b35)',
+            spicy: 'linear-gradient(45deg, #ff4500, #ff0000)',
+            nuclear: 'linear-gradient(45deg, #ff0000, #8b0000, #ff0000)'
+        };
+        roastMeter.style.background = colors[level];
+        
+        // Add intensity effects
+        if (level === 'nuclear') {
+            roastMeter.style.boxShadow = '0 0 15px #ff0000';
+            roastMeter.style.animation = 'nuclearPulse 1s ease-in-out infinite alternate';
+            card.style.borderColor = '#ff0000';
+            card.style.boxShadow = '0 0 25px rgba(255, 0, 0, 0.6)';
+        } else {
+            roastMeter.style.boxShadow = '';
+            roastMeter.style.animation = '';
+            card.style.borderColor = '';
+            card.style.boxShadow = '';
+        }
+    });
+}
+
+function showLevelChangeEffect(level) {
+    const effect = document.createElement('div');
+    effect.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 20px currentColor;
+        z-index: 10002;
+        pointer-events: none;
+        animation: levelChangeEffect 2s ease-out forwards;
+    `;
+    
+    const levelMessages = {
+        mild: '🌱 MILD ROAST ACTIVATED',
+        medium: '🔥 MEDIUM HEAT ENGAGED',
+        spicy: '🌶️ SPICY MODE ON!',
+        nuclear: '☢️ NUCLEAR DESTRUCTION!'
+    };
+    
+    const colors = {
+        mild: '#4CAF50',
+        medium: '#ff9800',
+        spicy: '#ff4500',
+        nuclear: '#ff0000'
+    };
+    
+    effect.textContent = levelMessages[level];
+    effect.style.color = colors[level];
+    
+    document.body.appendChild(effect);
+    setTimeout(() => effect.remove(), 2000);
+}
+
+function playLevelChangeSound(level) {
+    if (!window.AudioContext) return;
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    const frequencies = {
+        mild: [220, 330],
+        medium: [330, 440],
+        spicy: [440, 660],
+        nuclear: [660, 880, 1100]
+    };
+    
+    const freqs = frequencies[level];
+    oscillator.frequency.setValueAtTime(freqs[0], audioContext.currentTime);
+    
+    freqs.forEach((freq, index) => {
+        if (index > 0) {
+            oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + index * 0.1);
+        }
+    });
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+}
+
 // Warning screen management
 function enterRoastZone() {
     document.getElementById('warningScreen').classList.remove('active');
