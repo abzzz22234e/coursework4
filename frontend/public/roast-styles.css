@@ -69,6 +69,220 @@ body {
     100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
+/* Level Change Effect */
+@keyframes levelChangeEffect {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    20% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    80% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Nuclear Pulse Effect */
+@keyframes nuclearPulse {
+    0% {
+        box-shadow: 0 0 15px #ff0000;
+        filter: brightness(1);
+    }
+    100% {
+        box-shadow: 0 0 30px #ff0000, 0 0 45px #ff4500;
+        filter: brightness(1.3);
+    }
+}
+
+/* Roast Level Selector Styles */
+.roast-level-selector {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ff4500;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.roast-level-selector h3 {
+    color: #ff4500;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px #ff4500;
+    animation: titleFlicker 2s ease-in-out infinite alternate;
+}
+
+.level-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.level-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+}
+
+.level-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.level-btn.active {
+    border-color: #ff4500;
+    background: rgba(255, 69, 0, 0.2);
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+}
+
+.level-btn[data-level="mild"] {
+    border-color: #4CAF50;
+}
+
+.level-btn[data-level="mild"]:hover,
+.level-btn[data-level="mild"].active {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.5);
+}
+
+.level-btn[data-level="medium"] {
+    border-color: #ff9800;
+}
+
+.level-btn[data-level="medium"]:hover,
+.level-btn[data-level="medium"].active {
+    border-color: #ff9800;
+    background: rgba(255, 152, 0, 0.2);
+    box-shadow: 0 0 25px rgba(255, 152, 0, 0.5);
+}
+
+.level-btn[data-level="spicy"] {
+    border-color: #ff4500;
+}
+
+.level-btn[data-level="spicy"]:hover,
+.level-btn[data-level="spicy"].active {
+    border-color: #ff4500;
+    background: rgba(255, 69, 0, 0.2);
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+}
+
+.level-btn[data-level="nuclear"] {
+    border-color: #ff0000;
+    animation: nuclearGlow 2s ease-in-out infinite alternate;
+}
+
+.level-btn[data-level="nuclear"]:hover,
+.level-btn[data-level="nuclear"].active {
+    border-color: #ff0000;
+    background: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+}
+
+.level-btn i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.level-btn span {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.level-btn small {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+.roast-warning {
+    background: rgba(255, 69, 0, 0.1);
+    border: 1px solid #ff4500;
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+}
+
+.roast-warning p {
+    margin: 0;
+    font-weight: 600;
+}
+
+#currentLevel {
+    color: #ff4500;
+    text-shadow: 0 0 10px #ff4500;
+}
+
+/* Background Level Effects */
+body.roast-mild .fire-bg {
+    opacity: 0.3;
+}
+
+body.roast-medium .fire-bg {
+    opacity: 0.6;
+}
+
+body.roast-spicy .fire-bg {
+    opacity: 0.8;
+}
+
+body.roast-nuclear .fire-bg {
+    opacity: 1;
+    filter: hue-rotate(30deg) brightness(1.3);
+}
+
+body.roast-nuclear {
+    animation: nuclearBackground 3s ease-in-out infinite alternate;
+}
+
+@keyframes nuclearBackground {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    100% {
+        filter: hue-rotate(15deg) brightness(1.1);
+    }
+}
+
+@keyframes nuclearGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.8), 0 0 35px rgba(255, 69, 0, 0.6);
+    }
+}
+
+@keyframes titleFlicker {
+    0% {
+        text-shadow: 0 0 15px #ff4500;
+    }
+    100% {
+        text-shadow: 0 0 25px #ff4500, 0 0 35px #ff0000;
+    }
+}
+
 /* Navigation */
 .roast-navbar {
     position: fixed;
